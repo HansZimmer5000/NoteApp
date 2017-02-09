@@ -13,3 +13,6 @@ There are a few categories, but its thought that you can easily add new ones dur
 - (Can) Include (more or less useful) some functionality with Erlang / Prolog.
 - (Can) If export is possible then perhaps an Excel example sheet for better overview on your PC
 - (Can) If that Excel sheet is done, the next Step is to let the Excel get the Notes all by its self, so the Excel is always up to date.
+
+# Changelog:
+- Change of heart: After a interesting lecture about Kotlin, lets try it out: Kotlin instead of Java.
