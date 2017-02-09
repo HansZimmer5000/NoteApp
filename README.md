@@ -16,3 +16,4 @@ There are a few categories, but its thought that you can easily add new ones dur
 
 # Changelog:
 - Change of heart: After a interesting lecture about Kotlin, lets try it out: Kotlin instead of Java.
+- Sadly the main data class "Note" should be Kotlin, because there its most effective (short!), but greenDao doesnt work with Kotlin here...
