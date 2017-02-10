@@ -24,9 +24,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     public Fragment getItem(int position) {
         switch (position) {
             case 0:
-                return NewNoteFragment.newInstance(position);
+                return NewNoteFragment.newInstance();
             case 1:
-                return AllNotesFragment.newInstance(position);
+                return AllNotesFragment.newInstance();
         }
         return null;
     }

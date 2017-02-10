@@ -3,4 +3,14 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="action_settings">Settings</string>
     <string name="section_format">Hello World from section: %1$d</string>
+
+    <string name="SiteTitle1">Neue Notiz erstellen</string>
+    <string name="NoteTitle">Note Titel</string>
+    <string name="NoteText">Note Text</string>
+
+    <string name="SiteTitle2">Alle Notizen</string>
+    <string name="add">Hinzufügen</string>
+    <string name="enter_new_note_title">Notiztitle</string>
+    <string name="click_to_remove">Zum löschen anklicken</string>
+    <string name="enter_new_note_text">Notiztext</string>
 </resources>

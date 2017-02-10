@@ -2,25 +2,19 @@ package com.noteapp.View;
 
 
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.TextView;
+import android.widget.Button;
+import android.widget.Toast;
 
 import com.noteapp.R;
 
-/**
- * Created by Michael on 10.02.2017.
- */
-
 public class NewNoteFragment extends Fragment {
 
-    /**
-     * The fragment argument representing the section number for this
-     * fragment.
-     */
-    private static final String ARG_SECTION_NUMBER = "section_number";
+    private Button mAddBtn;
 
     public NewNoteFragment() {
     }
@@ -29,10 +23,9 @@ public class NewNoteFragment extends Fragment {
      * Returns a new instance of this fragment for the given section
      * number.
      */
-    public static NewNoteFragment newInstance(int sectionNumber) {
+    public static NewNoteFragment newInstance() {
         NewNoteFragment fragment = new NewNoteFragment();
         Bundle args = new Bundle();
-        args.putInt(ARG_SECTION_NUMBER, sectionNumber);
         fragment.setArguments(args);
         return fragment;
     }
@@ -40,9 +33,17 @@ public class NewNoteFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        View rootView = inflater.inflate(R.layout.fragment_main, container, false);
-        TextView textView = (TextView) rootView.findViewById(R.id.section_label);
-        textView.setText(getString(R.string.section_format, getArguments().getInt(ARG_SECTION_NUMBER)));
+        //View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+        View rootView = inflater.inflate(R.layout.fragment_newnote, container, false);
+
+        mAddBtn = (Button) rootView.findViewById(R.id.buttonAdd);
+        mAddBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(getContext(), "not yet implemented, add button", Toast.LENGTH_SHORT).show();
+            }
+        });
+
         return rootView;
     }
 }
