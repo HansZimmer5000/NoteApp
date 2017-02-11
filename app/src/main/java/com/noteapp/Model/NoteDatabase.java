@@ -27,10 +27,10 @@ public class NoteDatabase extends SQLiteOpenHelper {
     private static final String DATE_CCSTR = String.valueOf(DATE_CC);
 
     // Tabellen- und deren Spaltennamen
-    private static final String TABLE = "note", KEY_ID = "id", KEY_TITLE = "title", KEY_TEXT = "text", KEY_DATE = "date";
+    private static final String TABLE = "note", KEY_ID = "id", KEY_TITLE = "titleTV", KEY_TEXT = "titleTV", KEY_DATE = "date";
 
     // Konstruktor
-    NoteDatabase(Context context) {
+    public NoteDatabase(Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
@@ -46,7 +46,7 @@ public class NoteDatabase extends SQLiteOpenHelper {
     }
 
     private static void createTableNOTE(SQLiteDatabase db) {
-        // 1. String title | 2. String text | 3. String / java.util date
+        // 1. String titleTV | 2. String titleTV | 3. String / java.util date
         db.execSQL("CREATE TABLE " + TABLE + "(" +
                 KEY_ID + " INTEGER PRIMARY KEY, " +
                 KEY_TITLE + " VARCHAR(" + TITLE_CCSTR + "), " +
@@ -64,7 +64,7 @@ public class NoteDatabase extends SQLiteOpenHelper {
     CRUD Methods = Create, Read, Update, Delete
     Schreiben, Lesen, Updaten und Loeschen von Eintraegen
     *//////////////////
-    public Long insertUserData(Note noteEntity) {
+    public Long insertNote(Note noteEntity) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
 
@@ -75,7 +75,7 @@ public class NoteDatabase extends SQLiteOpenHelper {
 
         Long id = db.insertOrThrow(TABLE, null, values);
 
-        Log.println(Log.ASSERT, "insertUserData", "new  Id = " + id);
+        Log.println(Log.ASSERT, "insertNote", "new  Id = " + id);
 
         noteEntity.setId(id.intValue());
 
@@ -128,15 +128,15 @@ public class NoteDatabase extends SQLiteOpenHelper {
     }
 
     public boolean deleteNote(String idStr) {
-        int oldUserCount = this.getUserDataCount();
+        int oldNoteCount = this.getNoteCount();
 
         SQLiteDatabase db = getWritableDatabase();
         long resLng = db.delete(TABLE, KEY_ID + " = ?", new String[]{idStr});
         db.close();
 
-        int newUserCount = this.getUserDataCount();
+        int newNoteCount = this.getNoteCount();
 
-        return (newUserCount + 1) == oldUserCount;
+        return (newNoteCount + 1) == oldNoteCount;
     }
 
     public ArrayList<Note> getAllNotes() {
@@ -162,7 +162,7 @@ public class NoteDatabase extends SQLiteOpenHelper {
         return res;
     }
 
-    public int getUserDataCount() {
+    public int getNoteCount() {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE, null);
         //"SELECT COUNT(*) FROM " + TABLE ????

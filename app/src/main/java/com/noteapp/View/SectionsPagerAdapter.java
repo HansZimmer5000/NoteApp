@@ -9,37 +9,34 @@ import android.support.v4.app.FragmentPagerAdapter;
  * one of the sections/tabs/pages.
  */
 public class SectionsPagerAdapter extends FragmentPagerAdapter {
-
     public SectionsPagerAdapter(FragmentManager fm) {
         super(fm);
     }
 
+    /**
+     * getCount
+     *
+     * @return the number of fragments
+     */
     @Override
     public int getCount() {
-        // Show 2 total pages.
         return 2;
     }
 
+    /**
+     * getItem
+     * Specifies the order of the fragments
+     * @param position the user wants to see
+     * @return fragment to show to the user
+     */
     @Override
     public Fragment getItem(int position) {
+        // So we dont have to check if position is within range of the list.
         switch (position) {
             case 0:
-                return NewNoteFragment.newInstance();
+                return new NewNoteFragment();
             case 1:
-                return AllNotesFragment.newInstance();
-        }
-        return null;
-    }
-
-    @Override
-    public CharSequence getPageTitle(int position) {
-        switch (position) {
-            case 0:
-                return "SECTION 1";
-            case 1:
-                return "SECTION 2";
-            case 2:
-                return "SECTION 3";
+                return new AllNotesFragment();
         }
         return null;
     }

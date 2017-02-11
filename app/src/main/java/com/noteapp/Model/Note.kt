@@ -4,7 +4,7 @@ import java.util.*
 
 /**
  * Note class
- * With Info about id (set from database), title, text, date.
+ * With Info about id (set from database), titleTV, titleTV, date.
  */
 data class Note(var id: Int,
                 var title: String,
