@@ -37,11 +37,6 @@ public class AllNotesFragment extends Fragment {
         //TODO: mFloatingBtn.setOnClickListener(AllNotesController.getFABOnClick()); onClick HIER oder im controller festlegen?
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerViewNotes);
-
-        return rootView;
-    }
-
-    protected void setUpViews() {
         mRecyclerView.setHasFixedSize(true);
         mRecyclerView.setLayoutManager(new LinearLayoutManager(getContext())); //TODO: Fehler, dass getContest statt this?
 
@@ -49,11 +44,12 @@ public class AllNotesFragment extends Fragment {
             @Override
             public void onNoteClick(int position) {
                 mController.deleteNote(mNotesAdapter.getNote(position).getId());
-                mNotesAdapter.setNotes(mController.getAllNotes());
+                mNotesAdapter.setNotes(mController.getAllNotes());//TODO: Also actualize Notes if new one was added! at best, everytime allnotesfragment is visible!!!
                 Toast.makeText(getContext(), mNotesAdapter.getNote(position).getTitle() + " is deleted!", Toast.LENGTH_SHORT).show();
             }
         });
         mRecyclerView.setAdapter(mNotesAdapter);
 
+        return rootView;
     }
 }

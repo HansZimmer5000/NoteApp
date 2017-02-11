@@ -27,7 +27,7 @@ public class NoteDatabase extends SQLiteOpenHelper {
     private static final String DATE_CCSTR = String.valueOf(DATE_CC);
 
     // Tabellen- und deren Spaltennamen
-    private static final String TABLE = "note", KEY_ID = "id", KEY_TITLE = "titleTV", KEY_TEXT = "titleTV", KEY_DATE = "date";
+    private static final String TABLE = "note", KEY_ID = "id", KEY_TITLE = "title", KEY_TEXT = "text", KEY_DATE = "date";
 
     // Konstruktor
     public NoteDatabase(Context context) {

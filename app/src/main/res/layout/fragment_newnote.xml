@@ -28,8 +28,9 @@
     <EditText
         android:id="@+id/ETNoteText"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
         android:lines="10"
+        android:layout_below="@id/ETNoteTitle"
         android:layout_toLeftOf="@id/buttonAdd"
         android:hint="@string/enter_new_note_text"
         android:imeOptions="actionDone"

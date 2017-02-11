@@ -20,6 +20,7 @@ import java.util.Date;
 public class NewNoteFragment extends Fragment {
 
     private Button mAddBtn;
+    private EditText mTitleET, mTextET;
 
     public NewNoteFragment() {
     }
@@ -30,6 +31,9 @@ public class NewNoteFragment extends Fragment {
         //View rootView = inflater.inflate(R.layout.fragment_main, container, false);
         View rootView = inflater.inflate(R.layout.fragment_newnote, container, false);
 
+        mTitleET = (EditText) rootView.findViewById(R.id.ETNoteTitle);
+        mTextET = (EditText) rootView.findViewById(R.id.ETNoteText);
+
         mAddBtn = (Button) rootView.findViewById(R.id.buttonAdd);
         mAddBtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -37,8 +41,8 @@ public class NewNoteFragment extends Fragment {
                 String title, text;
                 Date date;
 
-                title = ((EditText) view.findViewById(R.id.ETNoteTitle)).getText().toString();
-                text = ((EditText) view.findViewById(R.id.ETNoteText)).getText().toString();
+                title = mTitleET.getText().toString();
+                text = mTextET.getText().toString();
                 date = new Date();
 
                 MainActivity.mainController.provideDatabase().insertNote(new Note(0, title, text, date));
