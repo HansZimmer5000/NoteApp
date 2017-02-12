@@ -34,9 +34,9 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
         // So we dont have to check if position is within range of the list.
         switch (position) {
             case 0:
-                return new NewNoteFragment();
-            case 1:
                 return new AllNotesFragment();
+            case 1:
+                return new NewNoteFragment();
         }
         return null;
     }

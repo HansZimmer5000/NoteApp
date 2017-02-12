@@ -46,6 +46,7 @@ public class NewNoteFragment extends Fragment {
                 date = new Date();
 
                 MainActivity.mainController.provideDatabase().insertNote(new Note(0, title, text, date));
+                MainActivity.mainController.updateNotesAdapterList();
             }
         });
 
