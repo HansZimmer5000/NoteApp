@@ -19,13 +19,14 @@ public class NewNoteFragment extends Fragment {
     private NewNotesController mController;
 
     public NewNoteFragment() {
-        this.mController = new NewNotesController(getContext());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        //View rootView = inflater.inflate(R.layout.fragment_main, container, false);
+
+        this.mController = new NewNotesController(getContext());
+
         View rootView = inflater.inflate(R.layout.fragment_newnote, container, false);
 
         mTitleET = (EditText) rootView.findViewById(R.id.ETNoteTitle);

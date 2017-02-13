@@ -19,13 +19,14 @@ public class AllNotesFragment extends Fragment {
     private AllNotesController mController;
 
     public AllNotesFragment() {
-        mController = new AllNotesController(getContext());
     }
 
     @Override
     public View onCreateView(LayoutInflater inflater,
                              ViewGroup container,
                              Bundle savedInstanceState) {
+
+        mController = new AllNotesController(getContext());
 
         View rootView = inflater.inflate(R.layout.fragment_allnotes, container, false);
 

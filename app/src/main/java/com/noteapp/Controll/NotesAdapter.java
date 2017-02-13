@@ -18,9 +18,12 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
     private NoteClickListener clickListener;
     private List<Note> dataset;
 
-    public NotesAdapter(NoteClickListener clickListener) {
-        this.clickListener = clickListener;
+    public NotesAdapter() {
         this.dataset = new ArrayList<>();
+    }
+
+    public void setClickListener(NoteClickListener clickListener) {
+        this.clickListener = clickListener;
     }
 
     public void setNotes(@NonNull List<Note> notes) {
@@ -30,6 +33,11 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
 
     public Note getNote(int position) {
         return dataset.get(position);
+    }
+
+    @Override
+    public int getItemCount() {
+        return dataset.size();
     }
 
     @Override
@@ -47,20 +55,15 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
         holder.dateTV.setText(note.getDate().toString());
     }
 
-    @Override
-    public int getItemCount() {
-        return dataset.size();
-    }
-
-    public interface NoteClickListener {
+    interface NoteClickListener {
         void onNoteClick(int position);
     }
 
-    static class NoteViewHolder extends RecyclerView.ViewHolder {
+    class NoteViewHolder extends RecyclerView.ViewHolder {
 
-        public TextView titleTV, textTV, dateTV;
+        TextView titleTV, textTV, dateTV;
 
-        public NoteViewHolder(View itemView, final NoteClickListener clickListener) {
+        NoteViewHolder(View itemView, final NoteClickListener clickListener) {
             super(itemView);
             titleTV = (TextView) itemView.findViewById(R.id.TVNoteTitle);
             textTV = (TextView) itemView.findViewById(R.id.TVNoteText);
