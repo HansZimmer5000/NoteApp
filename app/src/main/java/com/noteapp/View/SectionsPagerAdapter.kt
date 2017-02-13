@@ -12,7 +12,6 @@ internal class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(
 
     /**
      * getCount
-
      * @return the number of fragments
      */
     override fun getCount(): Int {
@@ -22,9 +21,7 @@ internal class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(
     /**
      * getItem
      * Specifies the order of the fragments
-
-     * @param position the user wants to see
-     * *
+     * @param position of the fragment the user wants to see
      * @return fragment to show to the user
      */
     override fun getItem(position: Int): Fragment? {
