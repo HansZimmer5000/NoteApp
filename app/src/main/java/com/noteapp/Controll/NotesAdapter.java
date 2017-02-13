@@ -18,33 +18,9 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
     private NoteClickListener clickListener;
     private List<Note> dataset;
 
-    public interface NoteClickListener {
-        void onNoteClick(int position);
-    }
-
-    static class NoteViewHolder extends RecyclerView.ViewHolder {
-
-        public TextView titleTV, textTV, dateTV;
-
-        public NoteViewHolder(View itemView, final NoteClickListener clickListener) {
-            super(itemView);
-            titleTV = (TextView) itemView.findViewById(R.id.TVNoteTitle);
-            textTV = (TextView) itemView.findViewById(R.id.TVNoteText);
-            dateTV = (TextView) itemView.findViewById(R.id.TVNoteDate);
-            itemView.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    if (clickListener != null) {
-                        clickListener.onNoteClick(getAdapterPosition());
-                    }
-                }
-            });
-        }
-    }
-
     public NotesAdapter(NoteClickListener clickListener) {
         this.clickListener = clickListener;
-        this.dataset = new ArrayList<Note>();
+        this.dataset = new ArrayList<>();
     }
 
     public void setNotes(@NonNull List<Note> notes) {
@@ -74,5 +50,29 @@ public class NotesAdapter extends RecyclerView.Adapter<NotesAdapter.NoteViewHold
     @Override
     public int getItemCount() {
         return dataset.size();
+    }
+
+    public interface NoteClickListener {
+        void onNoteClick(int position);
+    }
+
+    static class NoteViewHolder extends RecyclerView.ViewHolder {
+
+        public TextView titleTV, textTV, dateTV;
+
+        public NoteViewHolder(View itemView, final NoteClickListener clickListener) {
+            super(itemView);
+            titleTV = (TextView) itemView.findViewById(R.id.TVNoteTitle);
+            textTV = (TextView) itemView.findViewById(R.id.TVNoteText);
+            dateTV = (TextView) itemView.findViewById(R.id.TVNoteDate);
+            itemView.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    if (clickListener != null) {
+                        clickListener.onNoteClick(getAdapterPosition());
+                    }
+                }
+            });
+        }
     }
 }

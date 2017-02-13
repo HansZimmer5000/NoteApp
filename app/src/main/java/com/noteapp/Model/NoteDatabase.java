@@ -12,15 +12,13 @@ import java.util.Date;
 
 public class NoteDatabase extends SQLiteOpenHelper {
 
+    // Allgemein gueltige public Konstanten
+    private static final int TITLE_CC = 30;
+    private static final int TEXT_CC = 200;
+    private static final int DATE_CC = 20;
     // Allgemein gueltige private Konstanten
     private static final int DATABASE_VERSION = 1;
     private static final String DATABASE_NAME = "MyNoteDb";
-
-    // Allgemein gueltige public Konstanten
-    public static final int TITLE_CC = 30;
-    public static final int TEXT_CC = 200;
-    public static final int DATE_CC = 20;
-
     // Anzahl der Chars, muss-Angabe fuer VarChar2, zu String konvertiert
     private static final String TITLE_CCSTR = String.valueOf(TITLE_CC);
     private static final String TEXT_CCSTR = String.valueOf(TEXT_CC);
@@ -34,17 +32,6 @@ public class NoteDatabase extends SQLiteOpenHelper {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
     }
 
-    @Override
-    public void onCreate(SQLiteDatabase db) {
-        createTableNOTE(db);
-    }
-
-    @Override
-    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
-        dropTableNOTE(db);
-        onCreate(db);
-    }
-
     private static void createTableNOTE(SQLiteDatabase db) {
         // 1. String titleTV | 2. String titleTV | 3. String / java.util date
         db.execSQL("CREATE TABLE " + TABLE + "(" +
@@ -55,9 +42,19 @@ public class NoteDatabase extends SQLiteOpenHelper {
                 ")");
     }
 
-
     private static void dropTableNOTE(SQLiteDatabase db) {
         db.execSQL("DROP TABLE IF EXISTS " + TABLE);
+    }
+
+    @Override
+    public void onCreate(SQLiteDatabase db) {
+        createTableNOTE(db);
+    }
+
+    @Override
+    public void onUpgrade(SQLiteDatabase db, int oldVersion, int newVersion) {
+        dropTableNOTE(db);
+        onCreate(db);
     }
 
     /*/////////////////
@@ -83,55 +80,11 @@ public class NoteDatabase extends SQLiteOpenHelper {
         return id;
     }
 
-    public Long updateNote(Note noteEntity) {
-        SQLiteDatabase db = getWritableDatabase();
-        ContentValues values = new ContentValues();
-
-        String birthStr = String.valueOf(noteEntity.getDate().getTime());
-        values.put(KEY_TITLE, noteEntity.getTitle());
-        values.put(KEY_TEXT, noteEntity.getText());
-        values.put(KEY_DATE, birthStr);
-
-        String idStr = String.valueOf(noteEntity.getId());
-        Integer res = db.update(TABLE, values, KEY_ID + "= ?", new String[]{idStr});
-
-        Log.println(Log.ASSERT, "updateNote", "update affected Rows: " + res);
-
-        db.close();
-
-        return res.longValue();
-    }
-
-    public Note getNote(String idStr) {
-        SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(TABLE, new String[]{KEY_ID, KEY_TITLE, KEY_TEXT, KEY_DATE}, KEY_ID + "=?", new String[]{idStr}, null, null, null, null);
-
-        if (cursor != null && cursor.getCount() > 0 && cursor.moveToFirst()) {
-
-            int id = cursor.getInt(0);
-            String notetitle = cursor.getString(1);
-            String noteText = cursor.getString(2);
-            Date noteDate = new Date(Long.valueOf(cursor.getString(3)));
-
-            Note noteEntity = new Note(id, notetitle, noteText, noteDate);
-
-            db.close();
-            cursor.close();
-            return noteEntity;
-        } else {
-            return null;
-        }
-    }
-
-    public boolean deleteNote(Note note) {
-        return deleteNote(String.valueOf(note.getId()));
-    }
-
     public boolean deleteNote(String idStr) {
         int oldNoteCount = this.getNoteCount();
 
         SQLiteDatabase db = getWritableDatabase();
-        long resLng = db.delete(TABLE, KEY_ID + " = ?", new String[]{idStr});
+        db.delete(TABLE, KEY_ID + " = ?", new String[]{idStr});
         db.close();
 
         int newNoteCount = this.getNoteCount();
@@ -162,7 +115,7 @@ public class NoteDatabase extends SQLiteOpenHelper {
         return res;
     }
 
-    public int getNoteCount() {
+    private int getNoteCount() {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE, null);
         //"SELECT COUNT(*) FROM " + TABLE ????

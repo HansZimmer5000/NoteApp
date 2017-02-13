@@ -8,7 +8,7 @@ import android.support.v4.app.FragmentPagerAdapter;
  * A {@link FragmentPagerAdapter} that returns a fragment corresponding to
  * one of the sections/tabs/pages.
  */
-public class SectionsPagerAdapter extends FragmentPagerAdapter {
+class SectionsPagerAdapter extends FragmentPagerAdapter {
     public SectionsPagerAdapter(FragmentManager fm) {
         super(fm);
     }
@@ -26,12 +26,13 @@ public class SectionsPagerAdapter extends FragmentPagerAdapter {
     /**
      * getItem
      * Specifies the order of the fragments
+     *
      * @param position the user wants to see
      * @return fragment to show to the user
      */
     @Override
     public Fragment getItem(int position) {
-        // So we dont have to check if position is within range of the list.
+        // So we don't have to check if position is within range of the list.
         switch (position) {
             case 0:
                 return new AllNotesFragment();

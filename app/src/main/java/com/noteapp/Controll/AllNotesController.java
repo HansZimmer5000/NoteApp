@@ -4,11 +4,8 @@ import android.content.Context;
 import android.view.View;
 import android.widget.Toast;
 
-import com.noteapp.Model.Note;
 import com.noteapp.Model.NoteDatabase;
 import com.noteapp.View.MainActivity;
-
-import java.util.ArrayList;
 
 public class AllNotesController {
 
@@ -20,20 +17,12 @@ public class AllNotesController {
         this.database = MainActivity.mainController.provideDatabase();
     }
 
-    public View.OnClickListener getFABOnClick() {
+    public View.OnClickListener getFABOListener() {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                getAllNotes();
+                Toast.makeText(mContext, "FAB not implemented yet!", Toast.LENGTH_SHORT).show();
             }
         };
-    }
-
-    public ArrayList<Note> getAllNotes() {
-        return database.getAllNotes();
-    }
-
-    public void deleteNote(int id) {
-        database.deleteNote(String.valueOf(id));
     }
 }

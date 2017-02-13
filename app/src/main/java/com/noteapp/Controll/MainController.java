@@ -18,8 +18,8 @@ public class MainController {
             @Override
             public void onNoteClick(int position) {
                 Toast.makeText(mContext, mNotesAdapter.getNote(position).getTitle() + " is deleted!", Toast.LENGTH_SHORT).show();
-                mDatabase.deleteNote(String.valueOf(mNotesAdapter.getNote(position).getId()));
-                mNotesAdapter.setNotes(mDatabase.getAllNotes());
+                deleteNote(mNotesAdapter.getNote(position).getId());
+                updateNotesAdapterList();
             }
         });
     }
@@ -28,15 +28,15 @@ public class MainController {
         return this.mDatabase;
     }
 
-    public Context provideContext() {
-        return this.mContext;
-    }
-
     public NotesAdapter provideNotesAdapter() {
         return this.mNotesAdapter;
     }
 
     public void updateNotesAdapterList() {
         this.mNotesAdapter.setNotes(this.mDatabase.getAllNotes());
+    }
+
+    private void deleteNote(int id) {
+        this.mDatabase.deleteNote(String.valueOf(id));
     }
 }

@@ -2,27 +2,24 @@ package com.noteapp.View;
 
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import com.noteapp.Controll.NewNotesController;
-import com.noteapp.Model.Note;
 import com.noteapp.R;
-
-import java.util.Date;
 
 public class NewNoteFragment extends Fragment {
 
     private Button mAddBtn;
     private EditText mTitleET, mTextET;
+    private NewNotesController mController;
 
     public NewNoteFragment() {
+        this.mController = new NewNotesController(getContext());
     }
 
     @Override
@@ -35,20 +32,7 @@ public class NewNoteFragment extends Fragment {
         mTextET = (EditText) rootView.findViewById(R.id.ETNoteText);
 
         mAddBtn = (Button) rootView.findViewById(R.id.buttonAdd);
-        mAddBtn.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                String title, text;
-                Date date;
-
-                title = mTitleET.getText().toString();
-                text = mTextET.getText().toString();
-                date = new Date();
-
-                MainActivity.mainController.provideDatabase().insertNote(new Note(0, title, text, date));
-                MainActivity.mainController.updateNotesAdapterList();
-            }
-        });
+        mAddBtn.setOnClickListener(mController.getAddBtnListener(mTitleET, mTextET));
 
         return rootView;
     }
