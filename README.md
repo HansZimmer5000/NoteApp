@@ -6,8 +6,8 @@ A Tab has a category, title and the text.
 There are a few categories, but its thought that you can easily add new ones during execution.
 
 # Milestones:
-- (Must) App can safe notes persistent on the phone.
-- (Must) App can create, list, update and delete single notes.
+- (Done, Must) App can safe notes persistent on the phone.
+- (Done, Must) App can create, list, update and delete single notes.
 - (Should) Safe the notes with something different then SQLite.
 - (Should) Export the notes (via Mail or something else).
 - (Can) Include (more or less useful) some functionality with Erlang / Prolog.
