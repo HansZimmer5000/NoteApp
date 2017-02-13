@@ -92,6 +92,25 @@ public class NoteDatabase extends SQLiteOpenHelper {
         return (newNoteCount + 1) == oldNoteCount;
     }
 
+    public Long updateNote(Note noteEntity) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+
+        String birthStr = String.valueOf(noteEntity.getDate().getTime());
+        values.put(KEY_TITLE, noteEntity.getTitle());
+        values.put(KEY_TEXT, noteEntity.getText());
+        values.put(KEY_DATE, birthStr);
+
+        String idStr = String.valueOf(noteEntity.getId());
+        Integer res = db.update(TABLE, values, KEY_ID + "= ?", new String[]{idStr});
+
+        Log.println(Log.ASSERT, "setUpdatingId", "setUpdatingId affected Rows: " + res);
+
+        db.close();
+
+        return res.longValue();
+    }
+
     public ArrayList<Note> getAllNotes() {
         SQLiteDatabase db = getReadableDatabase();
         Cursor cursor = db.rawQuery("SELECT * FROM " + TABLE, null);

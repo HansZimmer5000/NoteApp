@@ -1,12 +1,13 @@
 package com.noteapp.Controll
 
 import android.content.Context
-import android.widget.Toast
+import android.support.v4.app.FragmentManager
 import com.noteapp.Model.Note
-
 import com.noteapp.Model.NoteDatabase
+import com.noteapp.View.ListDialogFragment
+import com.noteapp.View.MainActivity
 
-class MainController(private val mContext: Context) {
+class MainController(private val mContext: Context, private val mFragmentManager: FragmentManager, private val mActivity: MainActivity) {
     private val mDatabase: NoteDatabase
     private val mNotesAdapter: NotesAdapter
 
@@ -15,14 +16,10 @@ class MainController(private val mContext: Context) {
         this.mNotesAdapter = NotesAdapter()
         this.mNotesAdapter.setClickListener(
                 NotesAdapter.NoteClickListener { position ->
-                    Toast.makeText(mContext, mNotesAdapter.getNote(position).title + " is deleted!", Toast.LENGTH_SHORT).show()
-                    deleteNote(mNotesAdapter.getNote(position).id)
-                    updateNotesAdapterList()
+                    var listDialog: ListDialogFragment = ListDialogFragment()
+                    listDialog.setItem(mNotesAdapter.getNote(position))
+                    listDialog.show(mFragmentManager, "")
                 })
-    }
-
-    fun provideDatabase(): NoteDatabase {
-        return this.mDatabase
     }
 
     fun provideNotesAdapter(): NotesAdapter {
@@ -33,11 +30,26 @@ class MainController(private val mContext: Context) {
         this.mNotesAdapter.setNotes(this.mDatabase.allNotes)
     }
 
-    fun deleteNote(id: Int) {
+    fun deleteNote(id: Int, dialog: ListDialogFragment) {
+        dialog.dismiss()
         this.mDatabase.deleteNote(id.toString())
+        this.updateNotesAdapterList()
     }
 
     fun saveNote(note: Note) {
         this.mDatabase.insertNote(note)
+        this.updateNotesAdapterList()
+        //TODO: Close Keyboard
+
+        this.mActivity.setOnAllNotesFragment()
+    }
+
+    fun setToBeUpdatedNote(note: Note, dialog: ListDialogFragment) {
+        dialog.dismiss()
+        this.mActivity.setToBeUpdatedNote(note)
+    }
+
+    fun updateNote(note: Note) {
+        this.mDatabase.updateNote(note)
     }
 }

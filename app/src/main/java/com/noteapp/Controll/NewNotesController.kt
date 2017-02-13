@@ -11,7 +11,8 @@ import java.util.*
 class NewNotesController(val mContext: Context) {
 
     val mainController: MainController = MainActivity.mainController
-    val allOkString: String = ""
+    var allOkString: String = ""
+    var updatingId: Int? = null
 
     fun getAddBtnListener(mTitleET: EditText, mTextET: EditText): View.OnClickListener {
         return View.OnClickListener {
@@ -21,8 +22,18 @@ class NewNotesController(val mContext: Context) {
             var checkedString: String = checkInput(title, text)
 
             if (checkedString == allOkString) {
-                mainController.saveNote(Note(0, title, text, date))
-                mainController.updateNotesAdapterList()
+                var id = updatingId
+                if (id != null) {
+                    mainController.updateNote(Note(id, title, text, date))
+                } else {
+                    mainController.saveNote(Note(0, title, text, date))
+                }
+
+                mTitleET.setText("")
+                mTextET.setText("")
+
+                this.updatingId = null
+
                 Toast.makeText(mContext, "New Note: " + title, Toast.LENGTH_SHORT).show()
             } else {
                 Toast.makeText(mContext, checkedString, Toast.LENGTH_SHORT).show()
@@ -45,5 +56,9 @@ class NewNotesController(val mContext: Context) {
         }
 
         return res
+    }
+
+    fun setUpdateNoteId(id: Int) {
+        this.updatingId = id
     }
 }

@@ -14,4 +14,6 @@
     <string name="enter_new_note_title">Notiztitle</string>
     <string name="click_to_remove">Zum löschen anklicken</string>
     <string name="enter_new_note_text">Notiztext</string>
+    <string name="deleteBtnStr">Delete</string>
+    <string name="actualizeBtnStr">Actualize</string>
 </resources>

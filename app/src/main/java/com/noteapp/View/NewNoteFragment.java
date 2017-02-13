@@ -10,6 +10,7 @@ import android.widget.Button;
 import android.widget.EditText;
 
 import com.noteapp.Controll.NewNotesController;
+import com.noteapp.Model.Note;
 import com.noteapp.R;
 
 public class NewNoteFragment extends Fragment {
@@ -36,5 +37,12 @@ public class NewNoteFragment extends Fragment {
         mAddBtn.setOnClickListener(mController.getAddBtnListener(mTitleET, mTextET));
 
         return rootView;
+    }
+
+    public void setToBeUpdatedNote(Note note) {
+        mTitleET.setText(note.getTitle());
+        mTextET.setText(note.getText());
+
+        mController.setUpdateNoteId(note.getId());
     }
 }

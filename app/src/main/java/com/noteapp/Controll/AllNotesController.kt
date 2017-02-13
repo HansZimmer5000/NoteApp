@@ -6,8 +6,6 @@ import android.widget.Toast
 
 class AllNotesController(val mContext: Context) {
 
-    private val ACCESS_TOKEN = "C4oPyF_L7NIAAAAAAAA-Sx1na7Htqx_Xvo-0F8Rh_iFQ66M4FhQkQcaqcLgwZpnZ"
-
     init {
 
     }

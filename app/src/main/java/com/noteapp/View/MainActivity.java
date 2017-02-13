@@ -5,8 +5,10 @@ import android.support.v4.app.FragmentPagerAdapter;
 import android.support.v4.view.ViewPager;
 import android.support.v7.app.AppCompatActivity;
 import android.view.WindowManager;
+import android.widget.Toast;
 
 import com.noteapp.Controll.MainController;
+import com.noteapp.Model.Note;
 import com.noteapp.R;
 
 public class MainActivity extends AppCompatActivity {
@@ -39,8 +41,22 @@ public class MainActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        mainController = new MainController(getApplicationContext());
+        mainController = new MainController(getApplicationContext(), getSupportFragmentManager(), this);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
+    }
+
+    public void setOnAllNotesFragment() {
+        mViewPager.setCurrentItem(0);
+    }
+
+    public void setToBeUpdatedNote(Note note) {
+        NewNoteFragment mFragment = (NewNoteFragment) mSectionsPagerAdapter.getItem(1);
+        if (mFragment != null) {
+            mViewPager.setCurrentItem(1);
+            //TODO: onCreatView in Fragment creates the EditTexts, so here is Nullpointer Exception: mFragment.setToBeUpdatedNote(note);
+        } else {
+            Toast.makeText(getApplicationContext(), "Fragment = null!", Toast.LENGTH_SHORT).show();
+        }
     }
 }
