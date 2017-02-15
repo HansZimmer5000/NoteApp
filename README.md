@@ -10,10 +10,11 @@ There are a few categories, but its thought that you can easily add new ones dur
 - (Done, Must) App can create, list, setUpdatingId and delete single notes.
 - (Should) Safe the notes with something different then SQLite.
 - (Should) Export the notes (via Mail or something else).
-- (Can) Include (more or less useful) some functionality with Erlang / Prolog.
+- (Kicked, Can) Include (more or less useful) some functionality with Erlang / Prolog.
 - (Can) If export is possible then perhaps an Excel example sheet for better overview on your PC
 - (Can) If that Excel sheet is done, the next Step is to let the Excel get the Notes all by its self, so the Excel is always up to date.
 
 # Changelog:
 - Change of heart: After a interesting lecture about Kotlin, lets try it out: Kotlin instead of Java.
 - Sadly the main data class "Note" should be Kotlin, because there its most effective (short!), but greenDao doesnt work with Kotlin here...
+- Kicked Erlang / Prolog functionality, its seems like it is pretty hard to get Erlang working on Android. In Addition, there is nothing to do for Erlang, will write a piece of Erlang in the next project
