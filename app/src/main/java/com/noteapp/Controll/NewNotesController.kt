@@ -16,13 +16,13 @@ class NewNotesController(val mContext: Context) {
 
     fun getAddBtnListener(mTitleET: EditText, mTextET: EditText): View.OnClickListener {
         return View.OnClickListener {
-            var title: String = mTitleET.text.toString()
-            var text: String = mTextET.text.toString()
-            var date: Date = Date()
-            var checkedString: String = checkInput(title, text)
+            val title: String = mTitleET.text.toString()
+            val text: String = mTextET.text.toString()
+            val date: Date = Date()
+            val checkedString: String = checkInput(title, text)
 
             if (checkedString == allOkString) {
-                var id = updatingId
+                val id = updatingId
                 if (id != null) {
                     mainController.updateNote(Note(id, title, text, date))
                 } else {

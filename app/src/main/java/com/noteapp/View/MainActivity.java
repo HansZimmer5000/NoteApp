@@ -47,16 +47,21 @@ public class MainActivity extends AppCompatActivity {
     }
 
     public void setOnAllNotesFragment() {
-        mViewPager.setCurrentItem(0);
+        mViewPager.setCurrentItem(mSectionsPagerAdapter.getAllNotesPos());
+    }
+
+    public void setOnNewNoteFragment() {
+        mViewPager.setCurrentItem(mSectionsPagerAdapter.getNewNotePos());
     }
 
     public void setToBeUpdatedNote(Note note) {
-        NewNoteFragment mFragment = (NewNoteFragment) mSectionsPagerAdapter.getItem(1);
-        if (mFragment != null) {
-            mViewPager.setCurrentItem(1);
-            //TODO: onCreatView in Fragment creates the EditTexts, so here is Nullpointer Exception: mFragment.setToBeUpdatedNote(note);
+
+        setOnNewNoteFragment();
+        NewNoteFragment mFragment = (NewNoteFragment) mSectionsPagerAdapter.getItem(mSectionsPagerAdapter.getNewNotePos());
+        if (mFragment == null) {
+            Toast.makeText(getApplicationContext(), "Can't Update Note, NewNoteFragment is not existent.", Toast.LENGTH_SHORT).show();
         } else {
-            Toast.makeText(getApplicationContext(), "Fragment = null!", Toast.LENGTH_SHORT).show();
+            mFragment.setToBeUpdatedNote(note);
         }
     }
 }

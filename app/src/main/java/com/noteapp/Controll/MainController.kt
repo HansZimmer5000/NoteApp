@@ -51,5 +51,8 @@ class MainController(private val mContext: Context, private val mFragmentManager
 
     fun updateNote(note: Note) {
         this.mDatabase.updateNote(note)
+        this.updateNotesAdapterList()
+
+        this.mActivity.setOnAllNotesFragment()
     }
 }

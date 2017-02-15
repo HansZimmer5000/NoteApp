@@ -33,14 +33,14 @@ public class ListDialogFragment extends DialogFragment {
             @Override
             public void onClick(View v) {
                 Toast.makeText(getContext(), myClickedItem.getTitle() + " is deleted", Toast.LENGTH_SHORT).show();
-                mainController.deleteNote(myClickedItem.getId(), getThisDialog());
+                mainController.deleteNote(myClickedItem.getId(), ListDialogFragment.this);
             }
         });
 
         dialogActualize.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mainController.setToBeUpdatedNote(myClickedItem, getThisDialog());
+                mainController.setToBeUpdatedNote(myClickedItem, ListDialogFragment.this);
             }
         });
 
@@ -49,9 +49,5 @@ public class ListDialogFragment extends DialogFragment {
 
     public void setItem(Note item) {
         this.myClickedItem = item;
-    }
-
-    private ListDialogFragment getThisDialog() {
-        return this;
     }
 }
