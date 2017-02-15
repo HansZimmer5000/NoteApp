@@ -13,7 +13,7 @@ import com.noteapp.R;
 
 public class MainActivity extends AppCompatActivity {
 
-    public static MainController mainController = null;
+    public static MainController mainController;
     /**
      * The {@link android.support.v4.view.PagerAdapter} that will provide
      * fragments for each of the sections. We use a
@@ -41,7 +41,7 @@ public class MainActivity extends AppCompatActivity {
         mViewPager = (ViewPager) findViewById(R.id.container);
         mViewPager.setAdapter(mSectionsPagerAdapter);
 
-        mainController = new MainController(getApplicationContext(), getSupportFragmentManager(), this);
+        mainController = new MainController(this);
 
         getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_HIDDEN);
     }

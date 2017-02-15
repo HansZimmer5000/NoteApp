@@ -7,19 +7,19 @@ import com.noteapp.Model.NoteDatabase
 import com.noteapp.View.ListDialogFragment
 import com.noteapp.View.MainActivity
 
-class MainController(private val mContext: Context, private val mFragmentManager: FragmentManager, private val mActivity: MainActivity) {
+class MainController(private val mActivity: MainActivity) {
+
+    private val mContext: Context
+    private val mFragmentManager: FragmentManager
     private val mDatabase: NoteDatabase
     private val mNotesAdapter: NotesAdapter
 
     init {
+        this.mContext = mActivity.applicationContext
+        this.mFragmentManager = mActivity.supportFragmentManager
         this.mDatabase = NoteDatabase(mContext)
         this.mNotesAdapter = NotesAdapter()
-        this.mNotesAdapter.setClickListener(
-                NotesAdapter.NoteClickListener { position ->
-                    var listDialog: ListDialogFragment = ListDialogFragment()
-                    listDialog.setItem(mNotesAdapter.getNote(position))
-                    listDialog.show(mFragmentManager, "")
-                })
+        this.mNotesAdapter.setClickListener(NoteClickListener(mFragmentManager))
     }
 
     fun provideNotesAdapter(): NotesAdapter {
