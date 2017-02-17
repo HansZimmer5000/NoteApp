@@ -22,7 +22,6 @@ public class DropboxController {
         } else {
             ActivityCompat.requestPermissions(activity, new String[]{Manifest.permission.WRITE_EXTERNAL_STORAGE}, PERM_REQUEST_CODE);
         }
-
     }
 
     public boolean checkPermission(Context context) {
@@ -39,6 +38,5 @@ public class DropboxController {
         } catch (Exception ex) {
             return false;
         }
-
     }
 }
