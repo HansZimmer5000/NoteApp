@@ -12,10 +12,12 @@ internal class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(
 
     val allNotes: AllNotesFragment = AllNotesFragment()
     val newNote: NewNoteFragment = NewNoteFragment()
+    val dropbox: DropBoxFragment = DropBoxFragment()
 
     val allNotesPos: Int = 0
     val newNotePos: Int = 1
-    val fragmentCount: Int = 2
+    val dropboxPos: Int = 2
+    val fragmentCount: Int = 3
 
     /**
      * getCount
@@ -36,6 +38,7 @@ internal class SectionsPagerAdapter(fm: FragmentManager) : FragmentPagerAdapter(
         when (position) {
             0 -> return this.allNotes
             1 -> return this.newNote
+            2 -> return this.dropbox
         }
         return null
     }

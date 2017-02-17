@@ -16,4 +16,7 @@
     <string name="enter_new_note_text">Notiztext</string>
     <string name="deleteBtnStr">Delete</string>
     <string name="actualizeBtnStr">Actualize</string>
+
+    <!-- Strings for the Dropbox Fragment -->
+    <string name="DB_APP_KEY">rjcgkdi7ku01tm8</string>
 </resources>

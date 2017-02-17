@@ -26,6 +26,10 @@ class MainController(private val mActivity: MainActivity) {
         return this.mNotesAdapter
     }
 
+    fun provideMainActivity(): MainActivity {
+        return this.mActivity
+    }
+
     fun updateNotesAdapterList() {
         this.mNotesAdapter.setNotes(this.mDatabase.allNotes)
     }
