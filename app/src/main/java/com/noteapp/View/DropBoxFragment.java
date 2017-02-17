@@ -1,9 +1,6 @@
 package com.noteapp.View;
 
-
-import android.app.Activity;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
@@ -18,7 +15,6 @@ import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.android.Auth;
 import com.dropbox.core.v2.DbxClientV2;
 import com.noteapp.Controll.DropboxController;
-import com.noteapp.Controll.FileHelper;
 import com.noteapp.Controll.UploadFileAsyncTask;
 import com.noteapp.R;
 
@@ -30,7 +26,6 @@ public class DropBoxFragment extends Fragment {
 
     final static private String DB_PREFS = "db_prefs";
     final static private String DB_ACCESS_TOKEN = "access_token";
-    final static private int FILE_REQUEST_CODE = 5;
     private DropboxController mController;
     private MainActivity mainActivity;
     private Button loginButton, uploadButton;
@@ -42,8 +37,7 @@ public class DropBoxFragment extends Fragment {
 
     public static DbxClientV2 getClient(String accessToken) {
         DbxRequestConfig config = DbxRequestConfig.newBuilder("NoteApp/1.0").build();
-        DbxClientV2 client = new DbxClientV2(config, accessToken);
-        return client;
+        return new DbxClientV2(config, accessToken);
     }
 
     @Override
@@ -90,7 +84,6 @@ public class DropBoxFragment extends Fragment {
         uploadButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (!mController.checkPermission(getContext())) {
                     Toast.makeText(getContext(), "Can't continue without Storage permissions", Toast.LENGTH_SHORT).show();
                 } else if (!mController.isConnected()) {
@@ -156,32 +149,14 @@ public class DropBoxFragment extends Fragment {
     }
 
     private void upload() {
-
-        Intent intent = new Intent(Intent.ACTION_OPEN_DOCUMENT);
-        intent.addCategory(Intent.CATEGORY_OPENABLE);
-        intent.setType("*/*");
-
-        startActivityForResult(intent, FILE_REQUEST_CODE);
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data) {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if (resultCode != Activity.RESULT_OK || data == null) return;
-        if (requestCode == FILE_REQUEST_CODE) {
-
-            //TODO: create new CSV File with all notes or update existent file
-            String fileString = FileHelper.getPath(getContext(), data.getData());
-            if (fileString != null) {
-                File file = createAllNotesFile(); //new File(fileString);
-                Toast.makeText(getContext(), "Starting upload", Toast.LENGTH_SHORT).show();
-                new UploadFileAsyncTask(getContext(), getClient(accessToken), file).execute();
-            }
-        }
+        //TODO: create new CSV File with all notes or update existent file, so no need for Intent an onActiviyResult
+        File file = createAllNotesFile(); //new File(fileString);
+        Toast.makeText(getContext(), "Starting upload", Toast.LENGTH_SHORT).show();
+        new UploadFileAsyncTask(getContext(), getClient(accessToken), file).execute();
     }
 
     public File createAllNotesFile() {
+        //TODO: Implement getting all the notes and safe it in csv file
         File file = null;
         try {
             file = new File(getContext().getCacheDir(), "bla.csv");
