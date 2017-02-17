@@ -23,6 +23,8 @@ import com.noteapp.Controll.UploadFileAsyncTask;
 import com.noteapp.R;
 
 import java.io.File;
+import java.io.FileWriter;
+import java.io.IOException;
 
 public class DropBoxFragment extends Fragment {
 
@@ -39,7 +41,7 @@ public class DropBoxFragment extends Fragment {
     }
 
     public static DbxClientV2 getClient(String accessToken) {
-        DbxRequestConfig config = DbxRequestConfig.newBuilder("zonk_test/1.0").build();
+        DbxRequestConfig config = DbxRequestConfig.newBuilder("NoteApp/1.0").build();
         DbxClientV2 client = new DbxClientV2(config, accessToken);
         return client;
     }
@@ -169,15 +171,28 @@ public class DropBoxFragment extends Fragment {
         if (resultCode != Activity.RESULT_OK || data == null) return;
         if (requestCode == FILE_REQUEST_CODE) {
 
+            //TODO: create new CSV File with all notes or update existent file
             String fileString = FileHelper.getPath(getContext(), data.getData());
             if (fileString != null) {
-                File file = new File(fileString);
+                File file = createAllNotesFile(); //new File(fileString);
                 Toast.makeText(getContext(), "Starting upload", Toast.LENGTH_SHORT).show();
                 new UploadFileAsyncTask(getContext(), getClient(accessToken), file).execute();
             }
         }
     }
 
+    public File createAllNotesFile() {
+        File file = null;
+        try {
+            file = new File(getContext().getCacheDir(), "bla.csv");
+            FileWriter writer = new FileWriter(file);
+            writer.write("HAHAHAH;HIHIHI");
+            writer.close();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return file;
+    }
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {

@@ -30,6 +30,7 @@ public class AllNotesFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_allnotes, container, false);
 
+        //TODO: By Pressing on FloatingActionButton, allNotes will be safed in one file (csv?) to a designated Dropbox folder
         mFloatingBtn = (FloatingActionButton) rootView.findViewById(R.id.fab);
         mFloatingBtn.setOnClickListener(mController.getFABOListener());
 

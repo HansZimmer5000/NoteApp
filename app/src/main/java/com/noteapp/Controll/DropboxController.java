@@ -8,9 +8,15 @@ import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
 import android.widget.Toast;
 
+import com.noteapp.View.MainActivity;
+
+import java.io.File;
+import java.io.IOException;
+
 public class DropboxController {
 
     final public int PERM_REQUEST_CODE = 6;
+    private MainActivity mainActivity = MainActivity.mainController.provideMainActivity();
 
     public DropboxController() {
     }
@@ -38,5 +44,16 @@ public class DropboxController {
         } catch (Exception ex) {
             return false;
         }
+    }
+
+    public File createAllNotesFile() {
+        File file = null;
+
+        try {
+            file = File.createTempFile("bla.txt", "dies ist ein Text");
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return file;
     }
 }
