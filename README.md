@@ -18,3 +18,4 @@ There are a few categories, but its thought that you can easily add new ones dur
 - Change of heart: After a interesting lecture about Kotlin, lets try it out: Kotlin instead of Java.
 - Sadly the main data class "Note" should be Kotlin, because there its most effective (short!), but greenDao doesnt work with Kotlin here...
 - Kicked Erlang / Prolog functionality, its seems like it is pretty hard to get Erlang working on Android. In Addition, there is nothing to do for Erlang, will write a piece of Erlang in the next project
+- Thanks to Mirajp1 for: https://github.com/mirajp1/ZonkDropBoxTest, now I understand the dropbox API
