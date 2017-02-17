@@ -17,10 +17,8 @@ import android.widget.Toast;
 import com.dropbox.core.DbxRequestConfig;
 import com.dropbox.core.android.Auth;
 import com.dropbox.core.v2.DbxClientV2;
-import com.noteapp.Controll.ConnectivityHelper;
 import com.noteapp.Controll.DropboxController;
 import com.noteapp.Controll.FileHelper;
-import com.noteapp.Controll.PermissionHelper;
 import com.noteapp.Controll.UploadFileAsyncTask;
 import com.noteapp.R;
 
@@ -59,15 +57,15 @@ public class DropBoxFragment extends Fragment {
         loginButton = (Button) rootView.findViewById(R.id.loginButton);
         uploadButton = (Button) rootView.findViewById(R.id.uploadButton);
 
-        PermissionHelper.askPermission(mainActivity, getContext());
+        mController.askPermission(mainActivity, getContext());
 
         loginButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 if (!isLoggedIn()) {
-                    if (!PermissionHelper.checkPermission(getContext())) {
+                    if (!mController.checkPermission(getContext())) {
                         Toast.makeText(getContext(), "Can't continue without permissions", Toast.LENGTH_SHORT).show();
-                    } else if (!ConnectivityHelper.isConnected()) {
+                    } else if (!mController.isConnected()) {
                         Toast.makeText(getContext(), "Check internet connection", Toast.LENGTH_SHORT).show();
                     } else {
                         startLogin();
@@ -91,9 +89,9 @@ public class DropBoxFragment extends Fragment {
             @Override
             public void onClick(View v) {
 
-                if (!PermissionHelper.checkPermission(getContext())) {
+                if (!mController.checkPermission(getContext())) {
                     Toast.makeText(getContext(), "Can't continue without Storage permissions", Toast.LENGTH_SHORT).show();
-                } else if (!ConnectivityHelper.isConnected()) {
+                } else if (!mController.isConnected()) {
                     Toast.makeText(getContext(), "Check Internet Connection", Toast.LENGTH_SHORT).show();
                 } else {
                     upload();
@@ -125,12 +123,10 @@ public class DropBoxFragment extends Fragment {
             mainActivity.runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    loginButton.setText("Logout");
+                    loginButton.setText(getString(R.string.dropbox_logout));
                 }
             });
         }
-
-
     }
 
     private void startLogin() {
@@ -149,13 +145,12 @@ public class DropBoxFragment extends Fragment {
         mainActivity.runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                loginButton.setText("DropBox Login");
+                loginButton.setText(getString(R.string.dropbox_login));
                 uploadButton.setEnabled(false);
             }
         });
 
         Toast.makeText(getContext(), "LoggedOut", Toast.LENGTH_LONG).show();
-
     }
 
     private void upload() {
@@ -165,28 +160,20 @@ public class DropBoxFragment extends Fragment {
         intent.setType("*/*");
 
         startActivityForResult(intent, FILE_REQUEST_CODE);
-
     }
 
     @Override
     public void onActivityResult(int requestCode, int resultCode, Intent data) {
         super.onActivityResult(requestCode, resultCode, data);
 
-        if (resultCode != Activity.RESULT_OK || data == null)
-            return;
+        if (resultCode != Activity.RESULT_OK || data == null) return;
         if (requestCode == FILE_REQUEST_CODE) {
 
-            if (resultCode == Activity.RESULT_OK) {
-
-                File file = new File(FileHelper.getPath(getContext(), data.getData()));
+            String fileString = FileHelper.getPath(getContext(), data.getData());
+            if (fileString != null) {
+                File file = new File(fileString);
                 Toast.makeText(getContext(), "Starting upload", Toast.LENGTH_SHORT).show();
-                new UploadFileAsyncTask(
-                        getContext(),
-                        getClient(accessToken),
-                        file)
-                        .execute();
-
-
+                new UploadFileAsyncTask(getContext(), getClient(accessToken), file).execute();
             }
         }
     }
@@ -194,12 +181,8 @@ public class DropBoxFragment extends Fragment {
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String permissions[], int[] grantResults) {
-        switch (requestCode) {
-            case PermissionHelper.PERM_REQUEST_CODE:
-                if (grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_DENIED) {
-                    Toast.makeText(getContext(), "Can't proceed without Storage permission", Toast.LENGTH_LONG).show();
-                }
-                break;
+        if (requestCode == mController.PERM_REQUEST_CODE && grantResults.length > 0 && grantResults[0] == PackageManager.PERMISSION_DENIED) {
+            Toast.makeText(getContext(), "Can't proceed without Storage permission", Toast.LENGTH_LONG).show();
         }
     }
 }

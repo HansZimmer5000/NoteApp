@@ -19,4 +19,7 @@
 
     <!-- Strings for the Dropbox Fragment -->
     <string name="DB_APP_KEY">rjcgkdi7ku01tm8</string>
+    <string name="dropbox_login">Login</string>
+    <string name="dropbox_logout">Logut</string>
+    <string name="dropbox_upload">Upload</string>
 </resources>
