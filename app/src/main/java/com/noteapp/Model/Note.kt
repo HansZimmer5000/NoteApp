@@ -9,5 +9,10 @@ import java.util.*
 data class Note(var id: Int,
                 var title: String,
                 var text: String,
-                var date: Date
-)
+                var date: Date) {
+
+    fun inCSVFormat(): String {
+        return "$title;$text;$date"
+    }
+}
+

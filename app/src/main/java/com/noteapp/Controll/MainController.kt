@@ -2,10 +2,13 @@ package com.noteapp.Controll
 
 import android.content.Context
 import android.support.v4.app.FragmentManager
+import android.util.Log
+import android.widget.Toast
 import com.noteapp.Model.Note
 import com.noteapp.Model.NoteDatabase
 import com.noteapp.View.ListDialogFragment
 import com.noteapp.View.MainActivity
+import java.util.*
 
 class MainController(private val mActivity: MainActivity) {
 
@@ -48,6 +51,10 @@ class MainController(private val mActivity: MainActivity) {
         this.mActivity.setOnAllNotesFragment()
     }
 
+    fun getAllNotes(): ArrayList<Note> {
+        return this.mDatabase.allNotes
+    }
+
     fun setToBeUpdatedNote(note: Note, dialog: ListDialogFragment) {
         dialog.dismiss()
         this.mActivity.setToBeUpdatedNote(note)
@@ -58,5 +65,13 @@ class MainController(private val mActivity: MainActivity) {
         this.updateNotesAdapterList()
 
         this.mActivity.setOnAllNotesFragment()
+    }
+
+    fun eventLogInfo(func: String, event: String) {
+        Log.println(Log.INFO, func, event)
+    }
+
+    fun eventToast(event: String) {
+        Toast.makeText(mContext, event, Toast.LENGTH_SHORT).show()
     }
 }

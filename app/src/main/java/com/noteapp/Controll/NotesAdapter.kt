@@ -9,7 +9,7 @@ import java.util.*
 
 class NotesAdapter : RecyclerView.Adapter<NoteViewHolder>() {
 
-    private var dataset: List<Note> = ArrayList<Note>()
+    private var dataset: List<Note> = ArrayList()
     private var clickListener: NoteClickListener? = null
 
     fun setClickListener(clickListener: NoteClickListener) {

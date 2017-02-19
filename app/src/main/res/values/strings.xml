@@ -1,25 +1,14 @@
 <resources>
     <!-- General Strings -->
     <string name="app_name">Noteapp</string>
-    <string name="action_settings">Settings</string>
 
     <!-- Strings for the New Notes Fragment -->
-    <string name="NewNotesSiteTitle">Neue Notiz erstellen</string>
-    <string name="NoteTitle">Note Titel</string>
-    <string name="NoteText">Note Text</string>
 
     <!-- Strings for the All Notes Fragment -->
-    <string name="AllNotesSiteTitle">Alle Notizen</string>
     <string name="add">Hinzufügen</string>
     <string name="enter_new_note_title">Notiztitle</string>
     <string name="click_to_remove">Zum löschen anklicken</string>
     <string name="enter_new_note_text">Notiztext</string>
     <string name="deleteBtnStr">Delete</string>
     <string name="actualizeBtnStr">Actualize</string>
-
-    <!-- Strings for the Dropbox Fragment -->
-    <string name="DB_APP_KEY">rjcgkdi7ku01tm8</string>
-    <string name="dropbox_login">Login</string>
-    <string name="dropbox_logout">Logut</string>
-    <string name="dropbox_upload">Upload</string>
 </resources>

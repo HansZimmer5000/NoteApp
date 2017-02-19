@@ -15,9 +15,9 @@ import java.io.IOException;
 
 public class UploadFileAsyncTask extends AsyncTask<Void, Void, String> {
 
-    private Context mContext;
-    private DbxClientV2 mDBClient;
-    private File file;
+    private final Context mContext;
+    private final DbxClientV2 mDBClient;
+    private final File file;
 
     public UploadFileAsyncTask(Context mContext, DbxClientV2 mDBClient, File file) {
         this.mContext = mContext;
@@ -28,7 +28,7 @@ public class UploadFileAsyncTask extends AsyncTask<Void, Void, String> {
     @Override
     protected String doInBackground(Void... voids) {
 
-        String res = "";
+        String res;
 
         try {
             FileInputStream fis = new FileInputStream(file);
