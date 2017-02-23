@@ -8,7 +8,7 @@ There are a few categories, but its thought that you can easily add new ones dur
 # Milestones:
 - (Done, Must) App can safe notes persistent on the phone.
 - (Done, Must) App can create, list, setUpdatingId and delete single notes.
-- (Should) Export the notes (via Mail or something else).
+- (Done, Should) Export the notes via Dropbox (Dropbox App on phone needed!).
 - (Kicked, Can) Include (more or less useful) some functionality with Erlang / Prolog.
 - (Can) If export is possible then perhaps an Excel example sheet for better overview on your PC
 - (Can) If that Excel sheet is done, the next Step is to let the Excel get the Notes all by its self, so the Excel is always up to date.
