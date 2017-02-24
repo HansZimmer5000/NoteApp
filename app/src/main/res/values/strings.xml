@@ -1,6 +1,7 @@
 <resources>
     <!-- General Strings -->
     <string name="app_name">Noteapp</string>
+    <string name="DB_APP_KEY">rjcgkdi7ku01tm8</string>
 
     <!-- Strings for the New Notes Fragment -->
 
