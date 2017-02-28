@@ -29,10 +29,12 @@
         android:id="@+id/ETNoteText"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:lines="10"
+        android:minLines="3"
+        android:lines="5"
+        android:maxLines="10"
         android:layout_below="@id/ETNoteTitle"
         android:hint="@string/enter_new_note_text"
         android:imeOptions="actionDone"
-        android:inputType="text" />
+        android:inputType="textMultiLine" />
 
 </RelativeLayout>
