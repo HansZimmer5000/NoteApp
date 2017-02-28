@@ -4,6 +4,7 @@
     <modules>
       <module fileurl="file://$PROJECT_DIR$/NoteApp.iml" filepath="$PROJECT_DIR$/NoteApp.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/noteappwatch/noteappwatch.iml" filepath="$PROJECT_DIR$/noteappwatch/noteappwatch.iml" />
     </modules>
   </component>
 </project>
