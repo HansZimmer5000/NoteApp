@@ -51,6 +51,4 @@ public class UploadFileAsyncTask extends AsyncTask<Void, Void, String> {
     protected void onPostExecute(String res) {
         Toast.makeText(mContext, res, Toast.LENGTH_LONG).show();
     }
-
-
 }
