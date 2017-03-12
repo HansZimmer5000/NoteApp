@@ -1,10 +1,16 @@
-package com.noteappwatch;
+package com.noteappwatch.View;
 
 import android.os.Bundle;
+import android.support.v7.widget.LinearLayoutManager;
+import android.support.v7.widget.RecyclerView;
 import android.support.wearable.activity.WearableActivity;
 import android.support.wearable.view.BoxInsetLayout;
 import android.view.View;
 import android.widget.TextView;
+
+import com.noteappwatch.Controll.NoteClickListener;
+import com.noteappwatch.Controll.MainController;
+import com.noteappwatch.R;
 
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -14,10 +20,11 @@ public class MainActivity extends WearableActivity {
 
     private static final SimpleDateFormat AMBIENT_DATE_FORMAT =
             new SimpleDateFormat("HH:mm", Locale.US);
-
     private BoxInsetLayout mContainerView;
-    private TextView mTextView;
-    private TextView mClockView;
+    private TextView mTextView, mClockView;
+    private RecyclerView mRecyclerView;
+
+    public static MainController mainController;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -25,9 +32,19 @@ public class MainActivity extends WearableActivity {
         setContentView(R.layout.activity_main);
         setAmbientEnabled();
 
+        mainController = new MainController(this);
+
         mContainerView = (BoxInsetLayout) findViewById(R.id.container);
         mTextView = (TextView) findViewById(R.id.text);
         mClockView = (TextView) findViewById(R.id.clock);
+
+        mRecyclerView = (RecyclerView) findViewById(R.id.recyclerViewNotes);
+        mRecyclerView.setHasFixedSize(true);
+        mRecyclerView.setLayoutManager(new LinearLayoutManager(this));
+
+        mRecyclerView.setAdapter(MainActivity.mainController.provideNotesAdapter());
+
+        MainActivity.mainController.updateNotesAdapterList();
     }
 
     @Override

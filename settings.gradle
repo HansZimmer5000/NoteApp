@@ -1,1 +1,1 @@
-include ':app', ':noteappwatch'
+include ':noteappwatch', ':app'
