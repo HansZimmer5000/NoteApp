@@ -3,6 +3,7 @@ package com.noteappwatch.Controll
 import android.content.Context
 import android.util.Log
 import android.widget.Toast
+import com.noteappwatch.Controll.NotesAdapter
 import com.noteappwatch.Model.Note
 import com.noteappwatch.View.MainActivity
 import java.util.*
@@ -39,8 +40,8 @@ class MainController(private val mActivity: MainActivity){
         var liste: ArrayList<Note> = ArrayList()
         var i = 0
 
-        liste.add(Note(i++,"title0","text0",Date()))
-        liste.add(Note(i++,"titel1","text1",Date()))
+        liste.add(Note(i++,"title0","text0", Date()))
+        liste.add(Note(i++,"titel1","text1", Date()))
 
 
         this.mNotesAdapter.setNotes(liste)

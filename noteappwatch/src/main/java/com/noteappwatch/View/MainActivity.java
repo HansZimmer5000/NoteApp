@@ -8,7 +8,6 @@ import android.support.wearable.view.BoxInsetLayout;
 import android.view.View;
 import android.widget.TextView;
 
-import com.noteappwatch.Controll.NoteClickListener;
 import com.noteappwatch.Controll.MainController;
 import com.noteappwatch.R;
 
