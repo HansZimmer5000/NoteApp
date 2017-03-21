@@ -38,9 +38,14 @@ class AllNotesController(val mContext: Context) {
         accessToken = null
     }
 
-    fun getFABOListener(): View.OnClickListener {
+    /**
+     * getFABListener returns a OnClickListener for the FAB.
+     * @Exception If no toast is visible, check the login() function if the accesstoken is null after executing login, if its null, there's the problem.
+     */
+    fun getFABListener(): View.OnClickListener {
         return View.OnClickListener {
             // Already logged in?
+
             if (!this.mIsLoggedIn) {
 
                 // Permissions ok?
@@ -60,7 +65,6 @@ class AllNotesController(val mContext: Context) {
 
                 // Permissions ok, ready for login
                 login()
-
             }
 
             // Still logged out? Still no Permissions? (Both could have been changed by if() before this one
@@ -92,6 +96,8 @@ class AllNotesController(val mContext: Context) {
         if (this.accessToken != null) {
             prefs.edit().putString(DB_ACCESS_TOKEN, accessToken).apply()
             mIsLoggedIn = true
+        } else {
+            Auth.startOAuth2Authentication(this.mainActivity,this.mainActivity.getString(R.string.DB_APP_KEY))
         }
     }
 
@@ -103,7 +109,7 @@ class AllNotesController(val mContext: Context) {
     fun createAllNotesFile(): File? {
         var file: File? = null
         try {
-            file = File(mContext.cacheDir, "bla.csv")
+            file = File(mContext.cacheDir, "Notes from NotesApp.csv")
             val writer = FileWriter(file)
 
             val allNotes: ArrayList<Note> = mainController.getAllNotes()

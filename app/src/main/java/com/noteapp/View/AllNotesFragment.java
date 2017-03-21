@@ -35,7 +35,7 @@ public class AllNotesFragment extends Fragment {
 
         //TODO: By Pressing on FloatingActionButton, allNotes will be safed in one file (csv?) to a designated Dropbox folder -> no extra Dropboxfragment
         mFloatingBtn = (FloatingActionButton) rootView.findViewById(R.id.fab);
-        mFloatingBtn.setOnClickListener(mController.getFABOListener());
+        mFloatingBtn.setOnClickListener(mController.getFABListener());
 
         mRecyclerView = (RecyclerView) rootView.findViewById(R.id.recyclerViewNotes);
         mRecyclerView.setHasFixedSize(true);
