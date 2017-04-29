@@ -111,7 +111,12 @@ class AllNotesController(val mContext: Context) {
         try {
             file = File(mContext.cacheDir, "Notes from NotesApp.csv")
             val writer = FileWriter(file)
+            // Write titles
+            writer.write("NOTE TITLE;")
+            writer.write("NOTE DATE;")
+            writer.write("NOTE TEXT\n")
 
+            // Write all the notes
             val allNotes: ArrayList<Note> = mainController.getAllNotes()
             for (note: Note in allNotes) {
                 writer.write(note.inCSVFormat() + "\n")
